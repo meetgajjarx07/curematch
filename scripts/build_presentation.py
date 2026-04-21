@@ -293,36 +293,40 @@ def build(out_path: Path):
     set_bg(s, PAPER)
     eyebrow(s, "The Team")
 
-    title(s, "Three engineers.\nThree language models.",
-          size=44, height=2.1, line_spacing=1.05, letter_spacing=-26)
+    title(s, "Three engineers. Three LLMs.",
+          size=38, height=1.0, letter_spacing=-24)
+
+    text(s, 0.6, 2.15, 10, 0.5,
+         "Each of us built a distinct language model into the product.",
+         size=15, color=INK_MUTE)
 
     # Three cards — each person + their LLM
     cards = [
         ("Aashish Patel",
          "LLM #1",
          "The Match Explainer",
-         "Reads the deterministic verdicts and writes a 2-sentence patient-facing narrative. Prompt-engineered refusal of off-topic content. Streaming UI."),
+         "Reads deterministic verdicts; writes a 2-sentence patient-facing narrative. Refusal-tuned."),
         ("Meet Gajjar",
          "LLM #2 + Frontend",
-         "The Chat Agent · LoRA fine-tune",
-         "RAG chat grounded in each trial's text. Fine-tuned Llama 3.2 1B on 450 Q&A pairs. Whole Next.js app: 3D scenes, GSAP, results globe, dashboard."),
+         "Chat Agent · LoRA fine-tune",
+         "RAG chat grounded in each trial's text. Fine-tuned Llama 3.2 1B. The entire Next.js app."),
         ("Daksh Gupta",
          "LLM #3",
          "The Eligibility Parser",
-         "Reads compound criteria, negation, and paraphrase that regex can't. Extracts structured fields from prose for the deterministic scorer."),
+         "Reads compound criteria, negation, paraphrase that regex can't. Feeds the same scorer."),
     ]
-    w, gap, top, h = 3.1, 0.15, 4.3, 2.8
+    w, gap, top, h = 3.1, 0.15, 3.1, 3.65
     for i, (who, tag, llm_title, body) in enumerate(cards):
         x = 0.6 + i * (w + gap)
         rect(s, x, top, w, h, WHITE, line=LINE_SOFT, rounded=True)
-        text(s, x + 0.3, top + 0.25, w - 0.6, 0.35, tag,
+        text(s, x + 0.3, top + 0.3, w - 0.6, 0.35, tag,
              size=9.5, color=ACCENT, bold=True, letter_spacing=250)
-        text(s, x + 0.3, top + 0.62, w - 0.6, 0.55, who,
-             size=18, color=INK, bold=True, letter_spacing=-10)
-        text(s, x + 0.3, top + 1.18, w - 0.6, 0.45, llm_title,
-             size=13, color=INK_SOFT, bold=True, italic=True)
-        text(s, x + 0.3, top + 1.72, w - 0.6, 1.0, body,
-             size=11, color=INK_MUTE, line_spacing=1.5)
+        text(s, x + 0.3, top + 0.7, w - 0.6, 0.55, who,
+             size=19, color=INK, bold=True, letter_spacing=-10)
+        text(s, x + 0.3, top + 1.32, w - 0.6, 0.8, llm_title,
+             size=13, color=INK_SOFT, bold=True, italic=True, line_spacing=1.35)
+        text(s, x + 0.3, top + 2.15, w - 0.6, 1.3, body,
+             size=11.5, color=INK_MUTE, line_spacing=1.55)
 
     footer(s, 5)
 
@@ -388,23 +392,25 @@ def build(out_path: Path):
          "A well-engineered prompt is a contract with the model — tight scope, explicit shape, no room to drift.",
          size=14, color=INK_MUTE, italic=True)
 
-    # System prompt code block
-    rect(s, 0.6, 2.8, 9.5, 3.6, PAPER_ALT, line=LINE_SOFT, rounded=True)
-    text(s, 0.85, 2.95, 9.0, 0.3, "SYSTEM PROMPT (abridged)",
+    # System prompt code block — centered, narrower for visual balance
+    code_left = 1.55
+    code_w = 7.55
+    rect(s, code_left, 2.8, code_w, 3.6, PAPER_ALT, line=LINE_SOFT, rounded=True)
+    text(s, code_left + 0.3, 2.95, code_w - 0.6, 0.3, "SYSTEM PROMPT (abridged)",
          size=9, color=INK_FAINT, bold=True, letter_spacing=200)
     prompt_lines = (
         "You are the CureMatch explainer.\n"
-        "Given per-criterion verdicts (match / excluded / unknown) for one\n"
-        "clinical trial and one patient profile, write ONE paragraph:\n\n"
+        "Given per-criterion verdicts (match / excluded /\n"
+        "unknown), write ONE paragraph:\n\n"
         "  • 2–3 sentences, ≤ 80 words.\n"
         "  • Lead with the strongest positive match.\n"
-        "  • If there are exclusions, name them specifically — \"Warfarin is\n"
-        "    on the exclusion list\" — never generically.\n"
-        "  • Close factually. No marketing language, no hype, no uncertainty\n"
+        "  • Name exclusions specifically — e.g. \"Warfarin\n"
+        "    is on the exclusion list\" — never generically.\n"
+        "  • Close factually. No hype, no uncertainty\n"
         "    beyond what the verdicts show.\n"
-        "  • Never fabricate criteria that aren't in the verdicts."
+        "  • Never fabricate criteria."
     )
-    text(s, 0.85, 3.25, 9.0, 3.1, prompt_lines,
+    text(s, code_left + 0.3, 3.25, code_w - 0.6, 3.1, prompt_lines,
          size=11, color=INK, font=FONT_MONO, line_spacing=1.5)
 
     text(s, 0.6, 6.55, 10, 0.3,
@@ -475,29 +481,28 @@ def build(out_path: Path):
     # Sample exchange, left
     ex_left = 0.6
     ex_w = 4.7
-    ex_top = 2.8
-    ex_h = 3.9
+    ex_top = 2.75
+    ex_h = 4.15
 
     rect(s, ex_left, ex_top, ex_w, ex_h, WHITE, line=LINE_SOFT, rounded=True)
-    text(s, ex_left + 0.25, ex_top + 0.2, ex_w - 0.5, 0.3, "IN-CONTEXT",
+    text(s, ex_left + 0.25, ex_top + 0.18, ex_w - 0.5, 0.3, "IN-CONTEXT",
          size=9, color=SUCCESS, bold=True, letter_spacing=200)
-    text(s, ex_left + 0.25, ex_top + 0.55, ex_w - 0.5, 0.4,
+    text(s, ex_left + 0.25, ex_top + 0.5, ex_w - 0.5, 0.4,
          "\u201CCan I join if I'm on Warfarin?\u201D",
          size=13, color=INK, italic=True, bold=True)
-    text(s, ex_left + 0.25, ex_top + 1.1, ex_w - 0.5, 1.3,
+    text(s, ex_left + 0.25, ex_top + 1.02, ex_w - 0.5, 1.3,
          "The trial's eligibility criteria list anticoagulants in the exclusions, so you "
-         "would not qualify while taking Warfarin. Final eligibility is determined by the "
-         "trial's investigators.",
+         "would not qualify while taking Warfarin.",
          size=11.5, color=INK_SOFT, line_spacing=1.55)
 
-    rect(s, ex_left + 0.25, ex_top + 2.65, ex_w - 0.5, 0.02, LINE_SOFT)
+    rect(s, ex_left + 0.25, ex_top + 2.3, ex_w - 0.5, 0.02, LINE_SOFT)
 
-    text(s, ex_left + 0.25, ex_top + 2.85, ex_w - 0.5, 0.3, "OUT-OF-CONTEXT",
+    text(s, ex_left + 0.25, ex_top + 2.5, ex_w - 0.5, 0.3, "OUT-OF-CONTEXT",
          size=9, color=WARNING, bold=True, letter_spacing=200)
-    text(s, ex_left + 0.25, ex_top + 3.2, ex_w - 0.5, 0.4,
+    text(s, ex_left + 0.25, ex_top + 2.85, ex_w - 0.5, 0.4,
          "\u201CWhat's the weather in Tokyo?\u201D",
          size=13, color=INK, italic=True, bold=True)
-    text(s, ex_left + 0.25, ex_top + 3.65, ex_w - 0.5, 0.6,
+    text(s, ex_left + 0.25, ex_top + 3.35, ex_w - 0.5, 0.7,
          "The trial's public information doesn't specify that.",
          size=11.5, color=INK_SOFT, line_spacing=1.55)
 
@@ -509,18 +514,19 @@ def build(out_path: Path):
          size=9, color=INK_FAINT, bold=True, letter_spacing=200)
 
     steps = [
-        ("1",  "Load trial's eligibility_criteria from trials.db."),
-        ("2",  "Inject as retrieval context in the system prompt."),
-        ("3",  "Forbid answering outside that text; script a refusal."),
-        ("4",  "Append user turn; stream completion from Groq."),
+        ("1",  "Load trial's eligibility text from trials.db."),
+        ("2",  "Inject it as retrieval context in the prompt."),
+        ("3",  "Forbid answering outside the text; script refusal."),
+        ("4",  "Append the user turn; stream from Groq."),
         ("5",  "Persist history per-NCT in localStorage."),
     ]
+    step_gap = 0.66
     for i, (n, t) in enumerate(steps):
-        y = ex_top + 0.75 + i * 0.58
+        y = ex_top + 0.8 + i * step_gap
         text(s, how_left + 0.3, y, 0.5, 0.4, n,
              size=15, color=ACCENT, bold=True, font=FONT_MONO)
-        text(s, how_left + 0.75, y + 0.04, how_w - 0.9, 0.5, t,
-             size=12, color=INK_SOFT, line_spacing=1.5)
+        text(s, how_left + 0.75, y + 0.02, how_w - 0.95, 0.55, t,
+             size=12, color=INK_SOFT, line_spacing=1.4)
 
     footer(s, 9)
 
