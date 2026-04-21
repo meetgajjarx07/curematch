@@ -428,14 +428,16 @@ Transition: "Here's the actual system diagram."
     eyebrow(s, "Architecture  ·  at a glance")
 
     title(s, "Three containers. One request path.",
-          size=30, height=0.9, letter_spacing=-20)
+          size=26, height=0.7, letter_spacing=-18)
 
-    text(s, 0.6, 1.9, 10, 0.4,
+    text(s, 0.6, 1.55, 10, 0.35,
          "Browser calls the server, server reads SQLite, server streams LLM responses back.",
-         size=12, color=INK_MUTE, italic=True)
+         size=11.5, color=INK_MUTE, italic=True)
 
+    # Size the diagram so it fits above the footer (slide is 7.5" tall, footer at 7.08).
+    # Canvas ratio is 18:10.5 so at width=8.2 height=4.78 — centered horizontally.
     image(s, CHARTS_DIR / "architecture.png",
-          left=0.35, top=2.45, width=10.0)
+          left=1.23, top=2.1, width=8.2)
 
     footer(s, 6)
     notes(s, """
