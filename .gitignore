@@ -62,3 +62,8 @@ gsap-skills/
 # ── Claude Code scaffolding (not part of product) ─
 SKILL.md
 CLAUDE\ \(1\).md
+
+# PowerPoint lock files
+~$*.pptx
+~$*.docx
+~$*.xlsx
