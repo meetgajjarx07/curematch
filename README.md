@@ -281,19 +281,26 @@ even if the other criteria align.
 
 ## Team
 
-A final-project submission by a team of three.
+Three engineers. Three language models. One matching platform.
 
-- **Meet Gajjar — Data · Agent · Fine-Tune.** Built the 65,081-trial ingest,
-  the `/data` corpus dashboard, the `/api/chat/[nctId]` RAG agent, the match
-  explainer route, the 450-pair Q&A training dataset, and the LoRA fine-tune
-  notebook for Llama 3.2 1B.
-- **Aashish Patel — Product · Opening.** Owns the problem framing, the
-  `/match` profile-intake flow, the happy-path demo narration, and the first
-  live demo of the match explainer on stage.
-- **Daksh Gupta — Pipeline · Matching.** Owns the rule-based parser
-  (`scripts/parse_rules.py`), the deterministic scoring engine
-  (`frontend/src/lib/scoring.ts`), the six-criterion weighting, and the
-  condition-disambiguation that prevents *"disease"* from matching every trial.
+- **Meet Gajjar — Frontend + Chat Agent LLM + LoRA Fine-Tune.**
+  Whole Next.js application: 3D scenes (React Three Fiber), GSAP scroll
+  storytelling, 3D results globe, Leaflet maps, Recharts dashboard. Built
+  the RAG chat agent (`/api/chat/[nctId]`) grounded in each trial's
+  eligibility text. Built the 450-pair Q&A training dataset
+  (`scripts/build_training_dataset.py`) and the LoRA fine-tune of Llama 3.2
+  1B in `notebooks/finetune_curematch.ipynb`.
+- **Aashish Patel — Match Explainer LLM + Prompt Engineering.**
+  Built `/api/match/explain` — the LLM that takes deterministic verdicts
+  and writes a 2-sentence patient-facing narrative. Authored the system
+  prompt that constrains output to ≤80 words, lead-with-positive, and
+  refuses to fabricate criteria. Owns the streaming UI integration.
+- **Daksh Gupta — LLM Eligibility Parser.**
+  Built the LLM-based parser that reads compound criteria, negation, and
+  paraphrase that regex can't handle. Extracts structured fields (excluded
+  medications, lab thresholds, ECOG) from free-text eligibility and feeds
+  them into the same deterministic scorer — same audit guarantees, higher
+  coverage.
 
 ---
 
