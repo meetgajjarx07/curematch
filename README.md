@@ -281,18 +281,19 @@ even if the other criteria align.
 
 ## Team
 
-This is a final-project submission by a team of three. Each member owns a
-distinct LLM contribution:
+A final-project submission by a team of three.
 
-- **A — Production chat agent.** Built `/api/chat/[nctId]`, the match
-  explainer route, the trial-page chat panel, and the RAG grounding prompt
-  that keeps the agent from hallucinating.
-- **B — Fine-tuning + dataset.** Built the 450-pair Q&A dataset from parsed
-  data, authored the Colab LoRA notebook, trained and evaluated a fine-tuned
-  Llama 3.2 1B adapter against the base model.
-- **C — The matching pipeline.** Built the rule-based parser, the
-  deterministic scoring engine, the 6-criterion weighting, and the condition
-  disambiguation that prevents *"disease"* from matching every trial.
+- **Meet Gajjar — Data · Agent · Fine-Tune.** Built the 65,081-trial ingest,
+  the `/data` corpus dashboard, the `/api/chat/[nctId]` RAG agent, the match
+  explainer route, the 450-pair Q&A training dataset, and the LoRA fine-tune
+  notebook for Llama 3.2 1B.
+- **Aashish Patel — Product · Opening.** Owns the problem framing, the
+  `/match` profile-intake flow, the happy-path demo narration, and the first
+  live demo of the match explainer on stage.
+- **Daksh Gupta — Pipeline · Matching.** Owns the rule-based parser
+  (`scripts/parse_rules.py`), the deterministic scoring engine
+  (`frontend/src/lib/scoring.ts`), the six-criterion weighting, and the
+  condition-disambiguation that prevents *"disease"* from matching every trial.
 
 ---
 

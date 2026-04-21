@@ -191,8 +191,8 @@ def build(out_path: Path):
                  "Team of three  ·  one codebase  ·  65,081 real trials",
                  font_size=14, color=INK_SOFT)
     add_text_box(s, 0.6, 5.95, 10, 0.4,
-                 "[Person A]  ·  [Person B]  ·  [Person C]",
-                 font_size=13, color=INK_FAINT, font_name=FONT_MONO)
+                 "Meet Gajjar  ·  Aashish Patel  ·  Daksh Gupta",
+                 font_size=14, color=INK_SOFT, font_name=FONT_MONO, bold=True)
 
     add_footer(s, 1)
 
@@ -208,12 +208,12 @@ def build(out_path: Path):
                  font_size=40, color=INK, bold=True, letter_spacing=-25, line_spacing=1.05)
 
     cards = [
-        ("Person A", "Product · Chat Agent", PERSON_A,
-         "Built the patient-facing chat agent and the match explainer. RAG grounding, streaming, refusal behavior."),
-        ("Person B", "Data · Fine-Tune", PERSON_B,
-         "Built the 450-pair Q&A dataset, trained a LoRA adapter on Llama 3.2 1B, evaluated before/after refusal."),
-        ("Person C", "Pipeline · Matching", PERSON_C,
-         "Built the rule-based parser, the deterministic scoring engine, and the condition-disambiguation that prevents false matches."),
+        ("Aashish Patel", "Product · Opening", PERSON_A,
+         "Opens the talk — the problem, what we built, and the happy-path demo. Walks through profile intake and the match explainer narrating verdicts live."),
+        ("Meet Gajjar", "Data · Agent · Fine-Tune", PERSON_B,
+         "The LLM layer end-to-end. The 65,081-trial corpus, the rule parser's 33% coverage, the LoRA fine-tune on Llama 3.2 1B, and the live chat agent demo."),
+        ("Daksh Gupta", "Pipeline · Matching", PERSON_C,
+         "Why rules decide the match, not the LLM. The six-criterion scoring engine and where LLMs expand matching — compound criteria, negation, paraphrase."),
     ]
     card_top = 3.5
     card_w = 3.15
@@ -238,7 +238,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.5, "Person A", "The Problem", PERSON_A)
+    add_speaker_tag(s, 0.6, 0.5, "Aashish Patel", "The Problem", PERSON_A)
 
     add_text_box(s, 0.6, 1.4, 10, 2.2,
                  "80% of trials miss\ntheir enrollment deadlines.",
@@ -266,7 +266,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.5, "Person A", "What We Built", PERSON_A)
+    add_speaker_tag(s, 0.6, 0.5, "Aashish Patel", "What We Built", PERSON_A)
 
     add_text_box(s, 0.6, 1.4, 10, 1.4, "Read every trial, for you.",
                  font_size=46, color=INK, bold=True, letter_spacing=-28)
@@ -299,7 +299,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, DEEP)
 
-    add_speaker_tag(s, 0.6, 0.5, "Person A", "Live Demo · Happy Path", PERSON_A)
+    add_speaker_tag(s, 0.6, 0.5, "Aashish Patel", "Live Demo · Happy Path", PERSON_A)
 
     add_text_box(s, 0.6, 1.4, 10, 2.3, "Let's see it.",
                  font_size=100, color=WHITE, bold=True, letter_spacing=-50)
@@ -323,7 +323,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person B", "The Corpus", PERSON_B)
+    add_speaker_tag(s, 0.6, 0.4, "Meet Gajjar", "The Corpus", PERSON_B)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9, "65,081 trials. All real.",
                  font_size=34, color=INK, bold=True, letter_spacing=-22)
@@ -344,7 +344,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person B", "The Rule Parser", PERSON_B)
+    add_speaker_tag(s, 0.6, 0.4, "Meet Gajjar", "The Rule Parser", PERSON_B)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9,
                  "RxNorm + regex  →  86 seconds for 65k trials.",
@@ -369,7 +369,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person B", "The Fine-Tune", PERSON_B)
+    add_speaker_tag(s, 0.6, 0.4, "Meet Gajjar", "The Fine-Tune", PERSON_B)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9, "LoRA on Llama 3.2 1B.",
                  font_size=34, color=INK, bold=True, letter_spacing=-22)
@@ -420,7 +420,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person B", "Demo #2 · The Agent", PERSON_B)
+    add_speaker_tag(s, 0.6, 0.4, "Meet Gajjar", "Demo #2 · The Agent", PERSON_B)
 
     add_text_box(s, 0.6, 0.95, 10, 1.4, "The patient-facing chat agent.",
                  font_size=34, color=INK, bold=True, letter_spacing=-22)
@@ -463,7 +463,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.5, "Person C", "The Design Decision", PERSON_C)
+    add_speaker_tag(s, 0.6, 0.5, "Daksh Gupta", "The Design Decision", PERSON_C)
 
     add_text_box(s, 0.6, 1.4, 10, 1.5,
                  "LLMs for language.\nRules for decisions.",
@@ -489,7 +489,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person C", "The Scoring Engine", PERSON_C)
+    add_speaker_tag(s, 0.6, 0.4, "Daksh Gupta", "The Scoring Engine", PERSON_C)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9, "Six criteria. One weighted score.",
                  font_size=30, color=INK, bold=True, letter_spacing=-20)
@@ -529,7 +529,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person C", "Where LLMs Expand Matching", PERSON_C)
+    add_speaker_tag(s, 0.6, 0.4, "Daksh Gupta", "Where LLMs Expand Matching", PERSON_C)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9,
                  "Rules cover 33%. LLMs read the rest.",
@@ -579,7 +579,7 @@ def build(out_path: Path):
     s = prs.slides.add_slide(blank)
     set_slide_bg(s, PAPER)
 
-    add_speaker_tag(s, 0.6, 0.4, "Person C", "Rules vs LLM · the tradeoff", PERSON_C)
+    add_speaker_tag(s, 0.6, 0.4, "Daksh Gupta", "Rules vs LLM · the tradeoff", PERSON_C)
 
     add_text_box(s, 0.6, 0.95, 10, 0.9, "Use each where each wins.",
                  font_size=30, color=INK, bold=True, letter_spacing=-20)
