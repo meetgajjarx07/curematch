@@ -210,6 +210,29 @@ CureMatch/
 # 1 · Clone
 git clone https://github.com/meetgajjarx07/curematch.git
 cd curematch
+```
+
+---
+
+## Serving a public URL
+
+`scripts/tunnel.sh` exposes the local Next.js dev server via a free
+Cloudflare Tunnel — ideal for demos, reviewers, and live presentation
+backup URLs. No deployment, no DNS, no cost.
+
+```bash
+brew install cloudflared   # one-time
+./scripts/tunnel.sh        # prints a https://*.trycloudflare.com URL
+```
+
+The URL is live as long as the terminal stays open. Share it with
+anyone — they'll hit your laptop through Cloudflare's edge.
+
+---
+
+## Running locally (continued)
+
+```bash
 
 # 2 · Fetch the trial data (~20 min, one time)
 python3 fetch_trials.py
