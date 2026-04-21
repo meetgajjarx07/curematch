@@ -65,7 +65,7 @@ FONT_MONO = "JetBrains Mono"
 
 SLIDE_W_IN = 10.667
 SLIDE_H_IN = 7.5
-TOTAL_SLIDES = 18
+TOTAL_SLIDES = 19
 
 
 # ─── Primitives ─────────────────────────────────────────────────
@@ -417,11 +417,48 @@ Say it exactly:
 • Close the slide: "Medical matching has to be auditable. You can't
    defend an exclusion by saying 'the model felt so.'"
 
-Transition: "Now here's who built what."
+Transition: "Here's the actual system diagram."
 """)
 
     # ════════════════════════════════════════════════════════════
-    # 06 · TEAM + SPLIT
+    # 06 · ARCHITECTURE DIAGRAM (visual)
+    # ════════════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    set_bg(s, PAPER)
+    eyebrow(s, "Architecture  ·  at a glance")
+
+    title(s, "Three containers. One request path.",
+          size=30, height=0.9, letter_spacing=-20)
+
+    text(s, 0.6, 1.9, 10, 0.4,
+         "Browser calls the server, server reads SQLite, server streams LLM responses back.",
+         size=12, color=INK_MUTE, italic=True)
+
+    image(s, CHARTS_DIR / "architecture.png",
+          left=0.35, top=2.45, width=10.0)
+
+    footer(s, 6)
+    notes(s, """
+ARCHITECTURE DIAGRAM — 45 seconds.
+
+Walk through the numbered flow:
+• "Three primary containers — browser, Next.js server, data layer."
+• "Arrow 1 — patient profile leaves the browser as JSON to the server."
+• "Arrow 2 — server asks SQLite for candidate trials using SQL."
+• "Arrow 3 — rows come back. Scoring engine runs on them."
+• "Arrow 4 — ranked matches return to the browser as JSON."
+• "Arrow 5 is the dashed purple arrow — only two routes call the LLM:
+   match/explain and chat. The rest of the system never touches Groq."
+• External services — OpenStreetMap for geocoding, Groq for LLM —
+   are dashed because they're cross-network, not local.
+• Bottom band — build-time pipelines. These run once when we ingest
+   and parse the corpus. Never on the request path.
+
+Transition: "So here's who built each piece."
+""")
+
+    # ════════════════════════════════════════════════════════════
+    # 07 · TEAM + SPLIT
     # ════════════════════════════════════════════════════════════
     s = prs.slides.add_slide(blank)
     set_bg(s, PAPER)
@@ -455,7 +492,7 @@ Transition: "Now here's who built what."
         text(s, x + 0.3, top + 2.15, w - 0.6, 1.3, body,
              size=11.5, color=INK_MUTE, line_spacing=1.55)
 
-    footer(s, 6)
+    footer(s, 7)
     notes(s, """
 THE TEAM — 30 seconds.
 
@@ -514,7 +551,7 @@ Transition: "Aashish — take it away."
          "trial's exclusion list; the protocol requires no current anticoagulant therapy.\u201D",
          size=13, color=INK_SOFT, italic=True, line_spacing=1.6)
 
-    footer(s, 7)
+    footer(s, 8)
     notes(s, """
 AASHISH — THE MATCH EXPLAINER · 50 seconds.
 
@@ -575,7 +612,7 @@ Transition: "Here's exactly how I constrained it to do that."
          "Result: deterministic verdicts stay deterministic. The LLM never changes the match — it only translates.",
          size=11, color=INK_FAINT, italic=True, align="center")
 
-    footer(s, 8)
+    footer(s, 9)
     notes(s, """
 AASHISH — PROMPT ENGINEERING · 45 seconds.
 
@@ -634,7 +671,7 @@ Transition: "Meet — the frontend and the rest of the LLM layer."
         text(s, x + 0.25, y + 0.62, w - 0.45, 0.6, body,
              size=10.5, color=INK_MUTE, line_spacing=1.45)
 
-    footer(s, 9)
+    footer(s, 10)
     notes(s, """
 MEET — THE APP · 50 seconds.
 
@@ -716,7 +753,7 @@ Transition: "Now the first LLM I built — the chat agent."
         text(s, how_left + 0.75, y + 0.02, how_w - 0.95, 0.55, t,
              size=12, color=INK_SOFT, line_spacing=1.4)
 
-    footer(s, 10)
+    footer(s, 11)
     notes(s, """
 MEET — THE CHAT AGENT · 55 seconds.
 
@@ -784,7 +821,7 @@ Transition: "I also fine-tuned a smaller model to verify this works."
          "Production inference uses base Llama 3.3 70B via Groq. The 1B fine-tune proves the dataset-construction pipeline works.",
          size=10, color=INK_FAINT, italic=True, align="center")
 
-    footer(s, 11)
+    footer(s, 12)
     notes(s, """
 MEET — FINE-TUNE · 55 seconds.
 
@@ -852,7 +889,7 @@ Transition: "Daksh — the LLM that reads the trials."
          "override: { if: on_dialysis, ignore_threshold: true }",
          size=11, color=INK_SOFT, line_spacing=1.6, font=FONT_MONO)
 
-    footer(s, 12)
+    footer(s, 13)
     notes(s, """
 DAKSH — THE LLM PARSER · 50 seconds.
 
@@ -899,7 +936,7 @@ Transition: "Here's how much coverage we gain."
          "The 67% gap is what an LLM parser closes. Same scorer downstream — triple the coverage.",
          size=12, color=ACCENT, bold=True)
 
-    footer(s, 13)
+    footer(s, 14)
     notes(s, """
 DAKSH — PARSER COVERAGE · 40 seconds.
 
@@ -957,7 +994,7 @@ Transition: "Because the scorer doesn't care where the fields came from."
          "You (HbA1c 6.2)  →  Required (≥ 7.5)  →  excluded.",
          size=16, color=INK, bold=True, font=FONT_MONO, letter_spacing=-8)
 
-    footer(s, 14)
+    footer(s, 15)
     notes(s, """
 DAKSH — SCORING ENGINE · 40 seconds.
 
@@ -996,7 +1033,7 @@ Transition: "From 65k trials to the top five — in milliseconds."
     image(s, CHARTS_DIR / "funnel.png",
           left=2.3, top=2.5, width=6.0)
 
-    footer(s, 15)
+    footer(s, 16)
     notes(s, """
 FUNNEL · 35 seconds.
 
@@ -1048,7 +1085,7 @@ Transition: "So what did we ship?"
          "Zero accounts · zero tracking · zero analytics · zero telemetry.",
          size=13, color=INK_MUTE, align="center", italic=True)
 
-    footer(s, 16)
+    footer(s, 17)
     notes(s, """
 IN NUMBERS · 30 seconds.
 
@@ -1092,7 +1129,7 @@ Transition: "We want to be honest about what we haven't done."
         text(s, 0.95, y + 0.35, 9, 0.55, body,
              size=12.5, color=INK_MUTE, line_spacing=1.5)
 
-    footer(s, 17)
+    footer(s, 18)
     notes(s, """
 LIMITATIONS · 35 seconds.
 
@@ -1132,7 +1169,7 @@ Transition: "To close."
     text(s, 0.6, 6.2, 10, 0.5, "Thank you. Questions?",
          size=18, color=RGBColor(0xC6, 0xC6, 0xCB))
 
-    footer(s, 18, dark=True)
+    footer(s, 19, dark=True)
     notes(s, """
 CLOSING · 20 seconds.
 
