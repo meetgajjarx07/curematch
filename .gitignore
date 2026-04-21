@@ -1,0 +1,64 @@
+# ── Secrets ─────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ── Large data files (regenerate via scripts) ─
+data/trials.db
+data/trials.db-shm
+data/trials.db-wal
+data/parsed.db
+data/parsed.db-shm
+data/parsed.db-wal
+data/raw/
+data/eval_parser_*.csv
+
+# ── Node / Next.js ──────────────────────────
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Python ──────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ── ML artifacts (may be large / license-restricted) ─
+adapter/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+curematch_lora.zip
+
+# ── OS / editor ─────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.log
+
+# ── Misc ────────────────────────────────────
+.claude/
+coverage/
+.turbo/
+
+# ── Excluded third-party vendored dirs ──────
+gsap-skills/
+
+# ── Claude Code scaffolding (not part of product) ─
+SKILL.md
+CLAUDE\ \(1\).md

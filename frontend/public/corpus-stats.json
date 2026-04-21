@@ -1,0 +1,246 @@
+{
+  "totals": {
+    "trials": 65081,
+    "locations": 411042,
+    "interventions": 236300,
+    "countries": 182
+  },
+  "phase_distribution": [
+    {
+      "name": "Not specified",
+      "count": 44582,
+      "pct": 68.5
+    },
+    {
+      "name": "Phase 2",
+      "count": 6908,
+      "pct": 10.6
+    },
+    {
+      "name": "Phase 1",
+      "count": 3793,
+      "pct": 5.8
+    },
+    {
+      "name": "Phase 3",
+      "count": 3384,
+      "pct": 5.2
+    },
+    {
+      "name": "Phase 1 / Phase 2",
+      "count": 2444,
+      "pct": 3.8
+    },
+    {
+      "name": "Phase 4",
+      "count": 2296,
+      "pct": 3.5
+    },
+    {
+      "name": "Other",
+      "count": 1674,
+      "pct": 2.6
+    }
+  ],
+  "top_conditions": [
+    {
+      "name": "Breast Cancer",
+      "count": 1150
+    },
+    {
+      "name": "Stroke",
+      "count": 758
+    },
+    {
+      "name": "Obesity",
+      "count": 638
+    },
+    {
+      "name": "Prostate Cancer",
+      "count": 613
+    },
+    {
+      "name": "Cancer",
+      "count": 612
+    },
+    {
+      "name": "Heart Failure",
+      "count": 505
+    },
+    {
+      "name": "Healthy",
+      "count": 497
+    },
+    {
+      "name": "Colorectal Cancer",
+      "count": 461
+    },
+    {
+      "name": "Depression",
+      "count": 446
+    },
+    {
+      "name": "Lung Cancer",
+      "count": 427
+    },
+    {
+      "name": "Parkinson Disease",
+      "count": 416
+    },
+    {
+      "name": "Cardiovascular Diseases",
+      "count": 373
+    }
+  ],
+  "top_countries": [
+    {
+      "name": "United States",
+      "count": 162772
+    },
+    {
+      "name": "China",
+      "count": 38551
+    },
+    {
+      "name": "France",
+      "count": 25859
+    },
+    {
+      "name": "Italy",
+      "count": 15953
+    },
+    {
+      "name": "Germany",
+      "count": 15830
+    },
+    {
+      "name": "Spain",
+      "count": 15524
+    },
+    {
+      "name": "United Kingdom",
+      "count": 11493
+    },
+    {
+      "name": "Canada",
+      "count": 10929
+    },
+    {
+      "name": "Japan",
+      "count": 10890
+    },
+    {
+      "name": "South Korea",
+      "count": 7496
+    }
+  ],
+  "parser_coverage": {
+    "parsed_total": 65081,
+    "medications_excluded": {
+      "count": 21191,
+      "pct": 32.6
+    },
+    "lab_thresholds": {
+      "count": 19062,
+      "pct": 29.3
+    },
+    "ecog": {
+      "count": 2628,
+      "pct": 4.0
+    }
+  },
+  "top_excluded_meds": [
+    {
+      "name": "Chemotherapy",
+      "count": 7000
+    },
+    {
+      "name": "Steroids",
+      "count": 6168
+    },
+    {
+      "name": "Corticosteroid",
+      "count": 5353
+    },
+    {
+      "name": "Immunosuppressive",
+      "count": 4304
+    },
+    {
+      "name": "Corticosteroids",
+      "count": 4285
+    },
+    {
+      "name": "Prednisone",
+      "count": 2962
+    },
+    {
+      "name": "Biologic",
+      "count": 2903
+    },
+    {
+      "name": "Immunotherapy",
+      "count": 2766
+    },
+    {
+      "name": "Anticoagulant",
+      "count": 2495
+    },
+    {
+      "name": "Insulin",
+      "count": 1914
+    },
+    {
+      "name": "Arb",
+      "count": 1527
+    },
+    {
+      "name": "Anticoagulation",
+      "count": 1430
+    }
+  ],
+  "top_lab_thresholds": [
+    {
+      "name": "AST",
+      "count": 8023
+    },
+    {
+      "name": "eGFR",
+      "count": 7003
+    },
+    {
+      "name": "ALT",
+      "count": 6439
+    },
+    {
+      "name": "Creatinine",
+      "count": 6298
+    },
+    {
+      "name": "Bilirubin",
+      "count": 6040
+    },
+    {
+      "name": "Hemoglobin",
+      "count": 5722
+    },
+    {
+      "name": "Platelets",
+      "count": 5661
+    },
+    {
+      "name": "BMI",
+      "count": 4972
+    },
+    {
+      "name": "ANC",
+      "count": 4594
+    },
+    {
+      "name": "LVEF",
+      "count": 3463
+    }
+  ],
+  "generated_at": 1776737719,
+  "parser_version": "rule-v1.0.0"
+}
