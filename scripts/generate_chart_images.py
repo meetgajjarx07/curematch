@@ -253,47 +253,61 @@ def chart_excluded_meds(stats: dict, out_dir: Path):
 
 
 def chart_funnel(stats: dict, out_dir: Path):
-    """Horizontal funnel — 65k → candidates → matches → top 5."""
+    """Horizontal funnel — 65k → candidates → matches → top 5.
+
+    Uses a visual tapering (fixed width ratios) rather than raw count ratios
+    so every stage remains legible — the relevant story is the ordering, not
+    the exact proportional shrinkage (which would make the last stage invisible).
+    """
     stages = [
-        ("Indexed corpus",       stats["totals"]["trials"],       ACCENT),
-        ("SQL pre-filter",       1572,                            ACCENT_LIGHT),  # diabetes example
-        ("Scored candidates",    147,                             SUCCESS),
-        ("Top 5 presented",      5,                               WARNING),
+        ("Indexed corpus",    stats["totals"]["trials"], "trials in SQLite",                  ACCENT,       1.00),
+        ("SQL pre-filter",    1572,                      "by distinctive condition words",    ACCENT_LIGHT, 0.72),
+        ("Scored candidates", 147,                       "6 criteria · weighted composite",   SUCCESS,      0.48),
+        ("Top 5 presented",   5,                         "highest-scoring matches",           WARNING,      0.28),
     ]
 
-    fig, ax = plt.subplots(figsize=(10, 5.5))
+    # Give each row 1.4 units of vertical space: 0.2 pad · 0.2 label · 0.8 bar · 0.2 pad
+    row_pitch = 1.4
+    bar_h = 0.8
+    fig, ax = plt.subplots(figsize=(11, 7.0))
     ax.set_xlim(0, 1)
-    ax.set_ylim(-0.5, len(stages) - 0.5)
+    ax.set_ylim(0, len(stages) * row_pitch)
     ax.invert_yaxis()
     ax.axis("off")
 
-    max_count = stages[0][1]
-    for i, (label, count, color) in enumerate(stages):
-        width = max(count / max_count, 0.02)  # min visible width
+    for i, (label, count, sub, color, width) in enumerate(stages):
+        row_top = i * row_pitch
         left = (1 - width) / 2
+        # Stage label, sits just below row_top with padding
+        ax.text(0.5, row_top + 0.15, label.upper(),
+                ha="center", va="center",
+                fontsize=10, color=INK_MUTE, fontweight="bold")
+        # Bar
+        bar_top = row_top + 0.35
         ax.add_patch(FancyBboxPatch(
-            (left, i - 0.3), width, 0.6,
-            boxstyle="round,pad=0,rounding_size=0.08",
+            (left, bar_top), width, bar_h,
+            boxstyle="round,pad=0,rounding_size=0.1",
             facecolor=color, edgecolor="none",
         ))
-        # Stage label above
-        ax.text(0.5, i - 0.34, label.upper(),
-                ha="center", va="bottom",
-                fontsize=9, color=INK_MUTE,
-                fontweight="bold")
-        # Value inside
-        ax.text(0.5, i + 0.02, f"{count:,}",
+        # Big number centered vertically in bar
+        ax.text(0.5, bar_top + bar_h / 2 - 0.08, f"{count:,}",
                 ha="center", va="center",
-                fontsize=22, color=WHITE, fontweight="bold")
+                fontsize=26, color=WHITE, fontweight="bold")
+        # Subtitle below number
+        ax.text(0.5, bar_top + bar_h / 2 + 0.22, sub,
+                ha="center", va="center",
+                fontsize=10, color=WHITE, alpha=0.88)
 
-    # Connecting arrows
+    # Arrows between stages — sit in the pad between bar bottom and next label
     for i in range(len(stages) - 1):
+        y_top = i * row_pitch + 0.35 + bar_h + 0.02
+        y_bot = (i + 1) * row_pitch + 0.02
         ax.annotate(
-            "", xy=(0.5, i + 0.45), xytext=(0.5, i + 0.3),
-            arrowprops=dict(arrowstyle="->", color=INK_FAINT, lw=1.2),
+            "", xy=(0.5, y_bot), xytext=(0.5, y_top),
+            arrowprops=dict(arrowstyle="->", color=INK_FAINT, lw=1.5),
         )
 
-    ax.set_title("From 65,081 trials to the right five   ·   in milliseconds",
+    ax.set_title("From 65,081 trials to the right five   ·   total latency: ~250 ms",
                  fontsize=15, loc="left", pad=18, x=-0.02)
 
     save(fig, out_dir / "funnel.png")
